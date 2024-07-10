@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Models.Usuario',
+    'Models.reclamo',
 ]
 
 MIDDLEWARE = [
@@ -79,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':  'diris_gestion_reclamos',
-        'USER':  'root',
-        'PASSWORD':  '',
-        'HOST':  'localhost',
+        'USER':  'newuser1',
+        'PASSWORD':  'gotenycandy123',
+        'HOST':  '127.0.0.1',
         'PORT':  '3306',
 
     }

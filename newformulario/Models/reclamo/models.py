@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Entidadreclamo(models.Model):
+class Entidadreclamo (models.Model):
     entidad_id = models.CharField(max_length=100)
     servicio_hecho_reclamo = models.CharField(max_length=100)
 

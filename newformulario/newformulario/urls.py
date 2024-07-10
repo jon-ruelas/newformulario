@@ -16,6 +16,7 @@ Including another URLcon f
 from django.contrib import admin
 from django.urls import path
 from Views.HomeView import HomeView
+from newformulario.Models.reclamo.views import FormularioReclamoView
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -23,5 +24,9 @@ urlpatterns = [
     path('pagina/', HomeView.pagina1, name='pagina1'),
     path('pagina2/<int:parametro1>', HomeView.pagina2, name='pagina2'),
     path('formulario/', HomeView.formulario, name='formulario'),
+    path('guardarReclamo/', FormularioReclamoView.procesar_formulario,
+         name='guardarReclamo'),
+
+
 
 ]

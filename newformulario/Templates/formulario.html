@@ -1,6 +1,9 @@
 {% extends 'index.html' %}
 
 {% block content %}
+  {% if form.errors %}
+    <div class="alert alert-danger" role="alert">This is a danger alert—check it out!</div>
+  {% endif %}
   <br />
   <center>
     <h1>LIBRO DE RECLAMACIONES EN SALUD VIRTUAL</h1>
@@ -14,7 +17,7 @@
         </div>
       </div>
       <div class="panel-body" style="margin:8px">
-        <form>
+        <form action="{% url 'guardarReclamo' %}" method="POST">
           <div class="form-row row" style="margin-left:20px  ">
             <div class="form-group col-md-6" style="margin-top:24px">
               <input type="text" class="form-control" disabled id="diris" placeholder="Dirección de Redes Integradas de Salud Lima Sur" />
@@ -177,22 +180,18 @@
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="panel-title" style="margin-left:20px">
-          <b>4. AUTORIZACIÓN DE NOTIFICACIÓN DEL RESULTADO DEL RECLAMO    </b>
+          <b>4. AUTORIZACIÓN DE NOTIFICACIÓN DEL RESULTADO DEL RECLAMO</b>
         </div>
       </div>
 
       <div class="panel-body" style="margin:8px">
         <div class="form-check" style="margin-left:20px">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Sí autorizo que se me notifique el resultado del reclamo al email consignado
-          </label>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+          <label class="form-check-label" for="flexRadioDefault1">Sí autorizo que se me notifique el resultado del reclamo al email consignado</label>
         </div>
         <div class="form-check" style="margin-left:20px">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
-            No autorizo que se me notifique el resultado del reclamo al email consignado
-          </label>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
+          <label class="form-check-label" for="flexRadioDefault2">No autorizo que se me notifique el resultado del reclamo al email consignado</label>
         </div>
       </div>
     </div>
@@ -201,8 +200,17 @@
       <b>Las IAFAS, IPRESS o UGIPRESS deben atender el reclamo en un plazo de 30 días hábiles.</b>
     </p>
     <p id="piepagina2" align="center">"Estimado Usuario: Usted puede presentar su denuncia ante SUSALUD ante hechos o actos que vulneren o pudieran vulnerar el derecho a la salud, o cuando no le hayan brindado un servicio, prestación o coberturas solicitadas o recibidas de las IAFAS O IPRESS o que dependen de las UGIPRESS pública, privada o mixtas, también ante la negativa de atención de su reclamo, irregularidad en su tramitación o disconformidad con el resultado del mismo o hacer uso de los mecanismos alternativos de solución de controversias ante el Centro de Conciliación y Arbitraje - CECONAR de SUSALUD".</p>
-    <br /> <div align="center" >
-      <button type="submit"  class="btn btn-primary btn-lg" style="margin-bottom:45px">Registrar</button>
+    <br /> <div align="center">
+      <button type="submit" class="btn btn-primary btn-lg" style="margin-bottom:45px">Registrar</button>
     </div>
   </div>
+
+   {% if mensaje %}
+  <div class="alert alert-success" role="alert">
+    This is a success alert—check it out!
+  </div>
+  {% endif %}
+
+
+  {{form}}
 {% endblock %}
