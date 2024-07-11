@@ -17,7 +17,8 @@
         </div>
       </div>
       <div class="panel-body" style="margin:8px">
-        <form action="{% url 'guardarReclamo' %}" method="POST">
+        {% csrf_token %}
+        <form method="post">
           <div class="form-row row" style="margin-left:20px  ">
             <div class="form-group col-md-6" style="margin-top:24px">
               <input type="text" class="form-control" disabled id="diris" placeholder="Dirección de Redes Integradas de Salud Lima Sur" />
@@ -61,7 +62,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="inputdocumento">Numero de documento</label>
-              <input type="text" class="form-control" id="inputdocumento" placeholder="" />
+              <input type="text" class="form-control" id="inputdocumentousuario" placeholder="" name="inputdocumentousuario" />
             </div>
             <br /><div class="form-group col-md-4" style="margin-top: 23px">
               <button type="button" class="btn btn-primary">Consultar</button>
@@ -70,18 +71,18 @@
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-6">
               <label for="inputusuario">Nombre de usuario</label>
-              <input type="text" class="form-control" disabled id="inputusuario" placeholder="" />
+              <input type="text" class="form-control" disabled id="inputnombreusuario" placeholder="" />
             </div>
 
             <div class="form-group col-md-6">
               <label for="inputcorreo">Correo</label>
-              <input type="text" class="form-control" id="inputcorreo" placeholder="" />
+              <input type="text" class="form-control" id="inputcorreousuario" placeholder="" name="inputcorreousuario" />
             </div>
           </div>
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-4">
               <label for="inputtelefono">Télefono</label>
-              <input type="text" class="form-control" id="inputtelefono" placeholder="" />
+              <input type="text" class="form-control" id="inputtelefonousuario" placeholder="" name="inputtelefonousuario" />
             </div>
             <div class="form-group col-md-4">
               <label for="inputdistrito">Seleccione distrito</label>
@@ -94,7 +95,7 @@
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-12">
               <label for="inputdireccion">Dirección</label>
-              <input type="text" class="form-control" id="inputdireccion" placeholder="" />
+              <input type="text" class="form-control" id="inputdireccionusuario" placeholder="" name="inputdireccionusuario" />
             </div>
           </div>
         </form>
@@ -119,7 +120,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="inputdocumento">Numero de documento</label>
-              <input type="text" class="form-control" id="inputdocumento" placeholder="" />
+              <input type="text" class="form-control" id="inputdocumentopresenta" placeholder="" name="inputdocumentopresenta" />
             </div>
             <br /><div class="form-group col-md-4" style="margin-top: 23px">
               <button type="button" class="btn btn-primary">Consultar</button>
@@ -133,13 +134,13 @@
 
             <div class="form-group col-md-6">
               <label for="inputcorreo">Correo</label>
-              <input type="text" class="form-control" id="inputcorreo" placeholder="" />
+              <input type="text" class="form-control" id="inputcorreopresenta" placeholder="" name="inputcorreopresenta" />
             </div>
           </div>
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-4">
               <label for="inputtelefono">Télefono</label>
-              <input type="text" class="form-control" id="inputtelefono" placeholder="" />
+              <input type="text" class="form-control" id="inputtelefonopresenta" placeholder="" name="inputtelefonopresenta" />
             </div>
             <div class="form-group col-md-4">
               <label for="inputdistrito">Seleccione distrito</label>
@@ -152,7 +153,7 @@
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-12">
               <label for="inputdireccion">Dirección</label>
-              <input type="text" rows="4" class="form-control" id="inputdireccion" placeholder="" />
+              <input type="text" rows="4" class="form-control" id="inputdireccionpresenta" placeholder="" name="inputdireccionpresenta" />
             </div>
           </div>
         </form>
@@ -170,7 +171,7 @@
         <form>
           <div class="form-row" style="margin-left:20px">
             <div class="form-group col-md-12">
-              <textarea class="form-control" rows="5" id="comentarios" name="comentarios"></textarea>
+              <textarea class="form-control" rows="5" id="detallereclamo" name="detallereclamo"></textarea>
             </div>
           </div>
         </form>
@@ -205,12 +206,9 @@
     </div>
   </div>
 
-   {% if mensaje %}
-  <div class="alert alert-success" role="alert">
-    This is a success alert—check it out!
-  </div>
+  {% if messages %}
+    { % for msg in messages % }
+    <b>{{ smg }}</b>
+    {% endfor %}
   {% endif %}
-
-
-  {{form}}
 {% endblock %}
