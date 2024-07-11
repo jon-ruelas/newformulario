@@ -1,24 +1,21 @@
 {% extends 'index.html' %}
 
 {% block content %}
-  {% if form.errors %}
-    <div class="alert alert-danger" role="alert">This is a danger alert—check it out!</div>
-  {% endif %}
   <br />
   <center>
     <h1>LIBRO DE RECLAMACIONES EN SALUD VIRTUAL</h1>
   </center>
   <br />
-  <div class="content container">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <div class="panel-title" style="margin-left:20px">
-          <b>Regístra tu Reclamo - Hoja de Reclamación en Salud</b>
+  <form method="post">
+    {% csrf_token %}
+    <div class="container">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-title" style="margin-left:20px">
+            <b>Regístra tu Reclamo - Hoja de Reclamación en Salud</b>
+          </div>
         </div>
-      </div>
-      <div class="panel-body" style="margin:8px">
-        {% csrf_token %}
-        <form method="post">
+        <div class="panel-body" style="margin:8px">
           <div class="form-row row" style="margin-left:20px  ">
             <div class="form-group col-md-6" style="margin-top:24px">
               <input type="text" class="form-control" disabled id="diris" placeholder="Dirección de Redes Integradas de Salud Lima Sur" />
@@ -40,18 +37,16 @@
               </select>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <div class="panel-title" style="margin-left:20px">
-          <b>1. IDENTIFICACION DEL USUARIO O TERCERO LEGITIMADO</b>
         </div>
       </div>
-      <div class="panel-body" style="margin:8px">
-        <form>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-title" style="margin-left:20px">
+            <b>1. IDENTIFICACION DEL USUARIO O TERCERO LEGITIMADO</b>
+          </div>
+        </div>
+        <div class="panel-body" style="margin:8px">
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-4">
               <label for="inputtipodoc">Seleccione tipo de documento</label>
@@ -98,18 +93,16 @@
               <input type="text" class="form-control" id="inputdireccionusuario" placeholder="" name="inputdireccionusuario" />
             </div>
           </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <div class="panel-title" style="margin-left:20px">
-          <b>2. IDENTIFICACION DE QUIEN PRESENTA EL RECLAMO (En caso de ser el usuario afectado no es necesario su llenado)</b>
         </div>
       </div>
-      <div class="panel-body" style="margin:8px">
-        <form>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-title" style="margin-left:20px">
+            <b>2. IDENTIFICACION DE QUIEN PRESENTA EL RECLAMO (En caso de ser el usuario afectado no es necesario su llenado)</b>
+          </div>
+        </div>
+        <div class="panel-body" style="margin:8px">
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-4">
               <label for="inputtipodoc">Seleccione tipo de documento</label>
@@ -156,59 +149,57 @@
               <input type="text" rows="4" class="form-control" id="inputdireccionpresenta" placeholder="" name="inputdireccionpresenta" />
             </div>
           </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <div class="panel-title" style="margin-left:20px">
-          <b>3. DETALLE DEL RECLAMO</b>
         </div>
       </div>
 
-      <div class="panel-body" style="margin:8px">
-        <form>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-title" style="margin-left:20px">
+            <b>3. DETALLE DEL RECLAMO</b>
+          </div>
+        </div>
+
+        <div class="panel-body" style="margin:8px">
           <div class="form-row" style="margin-left:20px">
             <div class="form-group col-md-12">
               <textarea class="form-control" rows="5" id="detallereclamo" name="detallereclamo"></textarea>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <div class="panel-title" style="margin-left:20px">
-          <b>4. AUTORIZACIÓN DE NOTIFICACIÓN DEL RESULTADO DEL RECLAMO</b>
         </div>
       </div>
 
-      <div class="panel-body" style="margin:8px">
-        <div class="form-check" style="margin-left:20px">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-          <label class="form-check-label" for="flexRadioDefault1">Sí autorizo que se me notifique el resultado del reclamo al email consignado</label>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-title" style="margin-left:20px">
+            <b>4. AUTORIZACIÓN DE NOTIFICACIÓN DEL RESULTADO DEL RECLAMO</b>
+          </div>
         </div>
-        <div class="form-check" style="margin-left:20px">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-          <label class="form-check-label" for="flexRadioDefault2">No autorizo que se me notifique el resultado del reclamo al email consignado</label>
+
+        <div class="panel-body" style="margin:8px">
+          <div class="form-check" style="margin-left:20px">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+            <label class="form-check-label" for="flexRadioDefault1">Sí autorizo que se me notifique el resultado del reclamo al email consignado</label>
+          </div>
+          <div class="form-check" style="margin-left:20px">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
+            <label class="form-check-label" for="flexRadioDefault2">No autorizo que se me notifique el resultado del reclamo al email consignado</label>
+          </div>
         </div>
       </div>
-    </div>
 
-    <p id="piepagina1" align="center">
-      <b>Las IAFAS, IPRESS o UGIPRESS deben atender el reclamo en un plazo de 30 días hábiles.</b>
-    </p>
-    <p id="piepagina2" align="center">"Estimado Usuario: Usted puede presentar su denuncia ante SUSALUD ante hechos o actos que vulneren o pudieran vulnerar el derecho a la salud, o cuando no le hayan brindado un servicio, prestación o coberturas solicitadas o recibidas de las IAFAS O IPRESS o que dependen de las UGIPRESS pública, privada o mixtas, también ante la negativa de atención de su reclamo, irregularidad en su tramitación o disconformidad con el resultado del mismo o hacer uso de los mecanismos alternativos de solución de controversias ante el Centro de Conciliación y Arbitraje - CECONAR de SUSALUD".</p>
-    <br /> <div align="center">
-      <button type="submit" class="btn btn-primary btn-lg" style="margin-bottom:45px">Registrar</button>
+      <p id="piepagina1" align="center">
+        <b>Las IAFAS, IPRESS o UGIPRESS deben atender el reclamo en un plazo de 30 días hábiles.</b>
+      </p>
+      <p id="piepagina2" align="center">"Estimado Usuario: Usted puede presentar su denuncia ante SUSALUD ante hechos o actos que vulneren o pudieran vulnerar el derecho a la salud, o cuando no le hayan brindado un servicio, prestación o coberturas solicitadas o recibidas de las IAFAS O IPRESS o que dependen de las UGIPRESS pública, privada o mixtas, también ante la negativa de atención de su reclamo, irregularidad en su tramitación o disconformidad con el resultado del mismo o hacer uso de los mecanismos alternativos de solución de controversias ante el Centro de Conciliación y Arbitraje - CECONAR de SUSALUD".</p>
+      <br /> <div align="center">
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-bottom:45px">Registrar</button>
+      </div>
     </div>
-  </div>
+  </form>
 
   {% if messages %}
-    { % for msg in messages % }
-    <b>{{ smg }}</b>
+    {% for msg in messages %}
+      <b>{{ msg }}</b>
     {% endfor %}
   {% endif %}
 {% endblock %}
