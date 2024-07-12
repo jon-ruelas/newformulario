@@ -1,10 +1,12 @@
 from email import message
 from pyexpat.errors import messages
+from django.db import connection
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import get_template
 
 from Models.reclamo.models import Entidadreclamo
+from Views.SetupView import listar_autorizacion_correo, listar_entidades, listar_tipo_documento, listar_tipo_servicio
 
 
 class HomeView():
@@ -25,12 +27,20 @@ class HomeView():
         return HttpResponse(plantilla.render())
 
     def registroReclamo(request):
+        data = {
+            'entidad': listar_entidades(),
+            'tipo_documento': listar_tipo_documento(),
+            'tipo_servicio': listar_tipo_servicio(),
+            'autorizacion': listar_autorizacion_correo()
+
+
+        }
 
         if request.method == 'POST':
-            entidad_id = request.POST[""]
-            servicio_hecho_reclamo = request.POST[""]
+            entidad_id = request.POST["inputestablecimiento"]
+            servicio_hecho_reclamo = request.POST["inputtiposervicio"]
 
-            tipo_documento_ususario = request.POST[""]
+            tipo_documento_ususario = request.POST["inputtipodocusuario"]
             numero_documento_ususario = request.POST["inputdocumentousuario"]
             nombres_usuario = request.POST["inputnombreusuario"]
             apellido_paterno_usuario = request.POST[""]
@@ -42,7 +52,7 @@ class HomeView():
             # CREAR CAMPO EN BASE DE DATOS
             direccion_usuario = request.POST["inputdireccionusuario"]
 
-            tipo_documento_presenta = request.POST[""]
+            tipo_documento_presenta = request.POST["inputtipodocpresenta"]
             numero_documento_presenta = request.POST["inputdocumentopresenta"]
             nombres_presenta = request.POST[""]
             apellido_paterno_presenta = request.POST[""]
@@ -55,7 +65,7 @@ class HomeView():
 
             detalle_reclamo = request.POST["detallereclamo"]
 
-            autorizacion_notificacion_correo = request.POST[""]
+            autorizacion_notificacion_correo = request.POST["inputautoriza"]
 
             Entidadreclamo(
                 entidad_id=entidad_id,
@@ -87,6 +97,6 @@ class HomeView():
             ).save()
 
             messages.success(request, 'Se registró correctamente')
-            return render(request, 'formulario.html')
+            return render(request, 'formulario.html', data)
         else:
-            return render(request, 'formulario.html')
+            return render(request, 'formulario.html', data)

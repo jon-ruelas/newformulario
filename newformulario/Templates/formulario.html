@@ -22,18 +22,20 @@
             </div>
             <div class="form-group col-md-6">
               <label for="inputestablecimiento">Establecimiento de salud</label>
-              <select id="inputestablecimiento" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <select class="form-select" name="inputestablecimiento" class="form-control">
+                {% for c in entidad %}
+                  <option value="{{ c.0 }}">{{ c.1 }}</option>
+                {% endfor %}
               </select>
             </div>
           </div>
           <div class="form-row row" style="margin-left:20px  ">
             <div class="form-group col-md-6" style="margin-top:15px">
               <label for="inputtiposervicio">Tipo de servicio prestado</label>
-              <select id="inputtiposervicio" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <select class="form-select" name="inputtiposervicio" class="form-control">
+                {% for key, value in tipo_servicio.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
               </select>
             </div>
           </div>
@@ -50,14 +52,15 @@
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-4">
               <label for="inputtipodoc">Seleccione tipo de documento</label>
-              <select id="inputtipodoc" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <select class="form-select" id="inputtipodocusuario" name="inputtipodocusuario" class="form-control" onchange="activar_nombre_usuario()">
+                {% for key, value in tipo_documento.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="form-group col-md-4">
               <label for="inputdocumento">Numero de documento</label>
-              <input type="text" class="form-control" id="inputdocumentousuario" placeholder="" name="inputdocumentousuario" />
+              <input type="number" class="form-control" id="inputdocumentousuario" placeholder="" name="inputdocumentousuario" />
             </div>
             <br /><div class="form-group col-md-4" style="margin-top: 23px">
               <button type="button" class="btn btn-primary">Consultar</button>
@@ -77,7 +80,7 @@
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-4">
               <label for="inputtelefono">Télefono</label>
-              <input type="text" class="form-control" id="inputtelefonousuario" placeholder="" name="inputtelefonousuario" />
+              <input type="number" class="form-control" id="inputtelefonousuario" placeholder="" name="inputtelefonousuario" />
             </div>
             <div class="form-group col-md-4">
               <label for="inputdistrito">Seleccione distrito</label>
@@ -106,14 +109,15 @@
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-4">
               <label for="inputtipodoc">Seleccione tipo de documento</label>
-              <select id="inputtipodoc" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <select class="form-select" id="inputtipodocpresenta" name="inputtipodocpresenta" class="form-control" onchange="activar_nombre_usuario_2()">
+                {% for key, value in tipo_documento.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="form-group col-md-4">
               <label for="inputdocumento">Numero de documento</label>
-              <input type="text" class="form-control" id="inputdocumentopresenta" placeholder="" name="inputdocumentopresenta" />
+              <input type="number" class="form-control" id="inputdocumentopresenta" placeholder="" name="inputdocumentopresenta" />
             </div>
             <br /><div class="form-group col-md-4" style="margin-top: 23px">
               <button type="button" class="btn btn-primary">Consultar</button>
@@ -133,7 +137,7 @@
           <div class="form-row row" style="margin-left:20px ">
             <div class="form-group col-md-4">
               <label for="inputtelefono">Télefono</label>
-              <input type="text" class="form-control" id="inputtelefonopresenta" placeholder="" name="inputtelefonopresenta" />
+              <input type="number" class="form-control" id="inputtelefonopresenta" placeholder="" name="inputtelefonopresenta" />
             </div>
             <div class="form-group col-md-4">
               <label for="inputdistrito">Seleccione distrito</label>
@@ -176,14 +180,19 @@
         </div>
 
         <div class="panel-body" style="margin:8px">
-          <div class="form-check" style="margin-left:20px">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-            <label class="form-check-label" for="flexRadioDefault1">Sí autorizo que se me notifique el resultado del reclamo al email consignado</label>
+          <div class="form-row row" style="margin-left:20px ">
+            <div class="form-group col-md-7">
+              <select class="form-select" name="inputautoriza" class="form-control">
+                {% for key, value in autorizacion.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+            </div>
           </div>
-          <div class="form-check" style="margin-left:20px">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-            <label class="form-check-label" for="flexRadioDefault2">No autorizo que se me notifique el resultado del reclamo al email consignado</label>
-          </div>
+          <!--       <div class="form-check" style="margin-left:20px">
+            <input class="form-check-input" value="0" type="radio" name="input_no_autorizo"  checked />
+            <label class="form-check-label"  for="flexRadioDefault2">No autorizo que se me notifique el resultado del reclamo al email consignado</label>
+          </div>       -->
         </div>
       </div>
 
@@ -196,6 +205,29 @@
       </div>
     </div>
   </form>
+
+  <script type="text/javascript">
+    function activar_nombre_usuario() {
+      var select = document.getElementById('inputtipodocusuario')
+      var valorSeleccionado = select.value
+    
+      if (valorSeleccionado == 1) {
+        document.getElementById('inputnombreusuario').disabled = true
+      } else {
+        document.getElementById('inputnombreusuario').disabled = false
+      }
+    }
+    function activar_nombre_usuario_2() {
+      var select = document.getElementById('inputtipodocpresenta')
+      var valorSeleccionado = select.value
+    
+      if (valorSeleccionado == 1) {
+        document.getElementById('inputusuario').disabled = true
+      } else {
+        document.getElementById('inputusuario').disabled = false
+      }
+    }
+  </script>
 
   {% if messages %}
     {% for msg in messages %}
